@@ -106,3 +106,83 @@ create function avg_score as 'com.imooc.hive.udf.AvgScore' using jar 'hdfs://big
 
 drop function strlen;
 ```
+
+
+
+# hive-site.xml
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+
+
+<configuration>
+  <property>
+    <name>javax.jdo.option.ConnectionURL</name>
+    <value>jdbc:mysql://localhost:3306/metastore?useSSL=false</value>
+    <description>the URL of the MySQL database</description>
+  </property>
+  <property>
+    <name>javax.jdo.option.ConnectionDriverName</name>
+    <value>com.mysql.jdbc.Driver</value>
+    <description>Driver class name for a JDBC metastore</description>
+  </property>
+  <property>
+    <name>javax.jdo.option.ConnectionUserName</name>
+    <value>hive</value>
+  </property>
+  <property>
+    <name>javax.jdo.option.ConnectionPassword</name>
+    <value>1qaz@WSX</value>
+  </property>
+  <property>
+    <name>hive.metastore.warehouse.dir</name>
+    <value>/hive/warehouse</value>
+  </property>
+  <property>
+<!--    <name>hive.server2.enable.doAs</name>-->
+    <name>hive.server2.enable.impersonation</name>
+    <value>true</value>
+    <description>Set this property to enable impersonation in Hive Server 2</description>
+  </property>
+  <property>
+    <name>hive.metastore.execute.setugi</name>
+    <value>true</value>
+    <description>Set this property to enable impersonation in Hive Metastore</description>
+  </property>
+  <property>
+    <name>hive.server2.thrift.port</name>
+    <value>10000</value>
+  </property>
+  <property>
+    <name>hive.users.in.admin.role</name>
+    <value>hadoop</value>
+  </property>
+  <property>
+    <name>hive.metastore.authorization.storage.checks</name>
+    <value>true</value>
+  </property> 
+  <property>
+    <name>hive.secutiry.authorization.enabled</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>hive.secutiry.authorization.createtable.owner.grants</name>
+    <value>ALL</value>
+  </property>
+  <property>
+    <name>hive.secutiry.authorization.task.factory</name>
+    <value>org.apache.hadoop.hive.ql.parse.authorization.HiveAuthorizationTaskFactoryImpl</value>
+  </property>
+  <property>
+    <name>hive.sementic.analyzer.hook</name>
+    <value>com.imooc.hive.security.HiveAdmin</value>
+  </property> 
+</configuration>
+```
+
+## Hive Install Init
+```
+schematool --dbType mysql --initSchema
+```
