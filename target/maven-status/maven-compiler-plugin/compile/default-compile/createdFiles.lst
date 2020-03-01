@@ -1,0 +1,4 @@
+com/imooc/hive/security/HiveAdmin.class
+com/imooc/hive/udf/AvgScore.class
+com/imooc/hive/udf/StrLen.class
+com/imooc/App.class
